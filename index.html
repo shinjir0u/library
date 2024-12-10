@@ -8,6 +8,49 @@
     <title>Library</title>
 </head>
 <body>
-    
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo-content">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>library</title><path d="M12,8A3,3 0 0,0 15,5A3,3 0 0,0 12,2A3,3 0 0,0 9,5A3,3 0 0,0 12,8M12,11.54C9.64,9.35 6.5,8 3,8V19C6.5,19 9.64,20.35 12,22.54C14.36,20.35 17.5,19 21,19V8C17.5,8 14.36,9.35 12,11.54Z" /></svg>
+                <p class="logo-text">Library</p>
+            </div>
+            <div class="actions">
+                <button type="button" class="add-book action-button">
+                    Add Book
+                </button>
+            </div>
+        </div>
+        <div class="main-content">
+            <p class="books-label">Books</p>
+            <div class="books">
+                <div class="book">
+                    <p class="book-name">Harry Potter</p>
+                    <p class="author">J.K.Rollings</p>
+                    <p class="number-of-pages">1500</p>
+                    <p class="read-status">No</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
+
+<!--
+pseudocode
+
+CREATE div(container) with grid layout for two columns
+    CREATE a div(sidebar) with grid layout with two rows
+        CREATE a div(logo-content)
+            ADD a svg image for logo(logo)
+            CREATE a p(logo-text)
+        CREATE a div(actions)
+            CREATE a button(add-book) 
+    CREATE a div(main-content) with grid layout with two columns
+        CREATE a p(books-label) to add a header label
+        CREATE a div(books) with grid layout 
+            CREATE div(book) with grid layout
+                CREATE p(book-name) 
+                CREATE p(author)
+                CREATE p(number-of-pages)
+                CREATE p(read-status)   
+-->
