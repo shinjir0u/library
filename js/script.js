@@ -7,9 +7,9 @@ const readStatusIcon = document.querySelector(".read-status-icon");
 
 let books = new Map();
 
-let book1 = new Book(123, "Dummy", "Htoo", 150, "Read");
-let book2 = new Book(234, "Chilling", "Thant", 1000, "Not Read");
-let book3 = new Book(345, "Skill", "Scar", 100, "Not Read")
+let book1 = new Book(123, "Dummy", "Htoo", 150, true);
+let book2 = new Book(234, "Chilling", "Thant", 1000, false);
+let book3 = new Book(345, "Skill", "Scar", 100, false)
 
 books.set(book1.isbn, book1);
 books.set(book2.isbn, book2);
@@ -17,19 +17,18 @@ books.set(book3.isbn, book3);
 displayBooks(books);
 addButtonActions();
 
+function Book(isbn, name, author, numberOfPages, readStatus) {
+    this.isbn = isbn;
+    this.name = name;
+    this.author = author;
+    this.numberOfPages = numberOfPages;
+    this.readStatus = readStatus;
+}
+
 function clearDisplayedBooks() {
     Array.from(booksNode.children).forEach(book => {
         booksNode.removeChild(book);
     });
-}
-
-function removeBook(event) {
-    const book = event.target.parentNode.parentNode;
-    const bookIsbn = book.firstChild.textContent;
-    books.delete(+bookIsbn);
-    clearDisplayedBooks();
-    displayBooks(books);
-    addButtonActions();
 }
 
 function addButtonActions() {
@@ -38,15 +37,35 @@ function addButtonActions() {
 
     removeButtons.forEach(button => {
     button.addEventListener("click", removeBook);
-});
+    });
+
+    readButtons.forEach(button => {
+        button.addEventListener("click", changeReadStatus);
+    });
 }
 
-function Book(isbn, name, author, numberOfPages, readStatus) {
-    this.isbn = isbn;
-    this.name = name;
-    this.author = author;
-    this.numberOfPages = numberOfPages;
-    this.readStatus = readStatus;
+function removeBook(event) {
+    const book = event.target.parentNode.parentNode;
+    const bookIsbn = book.firstChild.textContent;
+    books.delete(+bookIsbn);
+
+    refreshPage();
+}
+
+function changeReadStatus(event) {
+    const book = event.target.parentNode.parentNode;
+    const bookIsbn = book.firstChild.textContent;
+
+    const bookInMap = books.get(+bookIsbn);
+    bookInMap.readStatus = !bookInMap.readStatus;
+
+    refreshPage();
+}
+
+function refreshPage() {
+    clearDisplayedBooks();
+    displayBooks(books);
+    addButtonActions();
 }
 
 function displayBooks(books) {
@@ -87,7 +106,7 @@ function generateBookContentNode(book) {
     const bookNameNode = generateBookContentRow("book-name", book.name);
     const authorNode = generateBookContentRow("author", book.author);
     const numberOfPagesNode = generateBookContentRow("number-of-pages", book.numberOfPages);
-    const readStatusNode = generateBookContentRow("read-status", book.readStatus);
+    const readStatusNode = generateBookContentRow("read-status", (book.readStatus) ? "Read" : "Not Read");
 
     bookContentNode.appendChild(bookNameNode);
     bookContentNode.appendChild(authorNode);
