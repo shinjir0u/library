@@ -7,9 +7,9 @@ const readStatusIcon = document.querySelector(".read-status-icon");
 
 let books = new Map();
 
-let book1 = new Book(123, "Dummy", "Htoo", 150, true);
-let book2 = new Book(234, "Chilling", "Thant", 1000, false);
-let book3 = new Book(345, "Skill", "Scar", 100, false)
+let book1 = new Book(123, "Dummy", "Htoo", 150, "Read");
+let book2 = new Book(234, "Chilling", "Thant", 1000, "Not Read");
+let book3 = new Book(345, "Skill", "Scar", 100, "Not Read")
 
 books.set(book1.isbn, book1);
 books.set(book2.isbn, book2);
@@ -32,13 +32,22 @@ function displayBooks(books) {
 
 function displayBook(book) {
     const bookNode = generateBookNode();
+    const hiddenIsbn = generateHiddenNode(book.isbn);
     const bookContentNode = generateBookContentNode(book);
     const bookButtonsNode = generateBookButtonsNode();
 
+    bookNode.appendChild(hiddenIsbn);
     bookNode.appendChild(bookContentNode);
     bookNode.appendChild(bookButtonsNode);
     booksNode.appendChild(bookNode);
 }  
+
+function generateHiddenNode(hiddenText) {
+    const hiddenNode = document.createElement("p");
+    hiddenNode.textContent = hiddenText;
+    hiddenNode.hidden = true;
+    return hiddenNode;
+}
 
 function generateBookNode() {
     const bookNode = document.createElement("div");
