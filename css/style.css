@@ -139,6 +139,10 @@
     gap: 1rem 1.5rem;
   }
 
+  .svg-icons {
+    display: none;
+  }
+
   .book {
     background-color: var(--white-color);
     box-shadow: -8px 0 var(--red-color);
