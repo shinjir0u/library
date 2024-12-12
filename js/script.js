@@ -15,6 +15,31 @@ books.set(book1.isbn, book1);
 books.set(book2.isbn, book2);
 books.set(book3.isbn, book3);
 displayBooks(books);
+addButtonActions();
+
+function clearDisplayedBooks() {
+    Array.from(booksNode.children).forEach(book => {
+        booksNode.removeChild(book);
+    });
+}
+
+function removeBook(event) {
+    const book = event.target.parentNode.parentNode;
+    const bookIsbn = book.firstChild.textContent;
+    books.delete(+bookIsbn);
+    clearDisplayedBooks();
+    displayBooks(books);
+    addButtonActions();
+}
+
+function addButtonActions() {
+    const removeButtons = document.querySelectorAll(".remove-button");
+    const readButtons = document.querySelectorAll(".read-button");
+
+    removeButtons.forEach(button => {
+    button.addEventListener("click", removeBook);
+});
+}
 
 function Book(isbn, name, author, numberOfPages, readStatus) {
     this.isbn = isbn;
