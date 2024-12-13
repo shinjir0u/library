@@ -173,7 +173,8 @@
     font-weight: bold;
   }
 
-  .book-buttons {
+  .book-buttons,
+  .dialog-buttons {
     place-self: end;
     display: grid;
     grid-template-columns: repeat(2, minmax(70px, 80px));
@@ -181,27 +182,40 @@
     gap: 0.5rem;
   }
 
-  .book-button {
+  .book-button,
+  .dialog-button {
     border-radius: 4px;
     background-color: var(--white-color);
     color: var(--red-color);
     border: 2px solid var(--red-color);
   }
 
-  .book-button:hover {
+  .book-button:hover,
+  .dialog-button:hover {
     color: var(--white-color);
     background-color: var(--red-color);
     font-weight: 500;
     cursor: pointer;
   }
 
+  dialog {
+    margin: 10vh auto;
+    padding: 0;
+    border: 1px solid var(--red-color);
+    width: min(500pxm, 30vw);
+  }
+
+  dialog::backdrop {
+    background-color: var(--gray-color);
+    opacity: 0.8;
+  }
+
   .dialog-box {
     display: grid;
     grid-template-rows: minmax(30px, 50px) auto;
-    background-color: var(--gray-color);
+    background-color: var(--white-color);
     border: 1px solid var(--black-color);
-    width: 70vw;
-    height: 70vh;
+    padding: 1rem;
   }
 
   .dialog-heading {
@@ -211,19 +225,28 @@
 
   .dialog-content {
     display: grid;
-    grid-template-columns: minmax(50px, 1fr) minmax(250px, 5fr);
+    grid-template-columns: minmax(50px, 1fr) minmax(250px, 2fr);
     justify-items: start;
     align-items: center;
     grid-auto-rows: minmax(20px, 30px);
     gap: 0.5rem;
   }
 
+  form > input,
+  .read-status-radio-buttons {
+    width: 100%;
+  }
+
   .read-status-radio-buttons {
     display: flex;
-    justify-content: space-between;
+    gap: 10px;
   }
+
+  .radio-text {
+    margin-right: 10px;
+  }
+
 
   .dialog-buttons {
     grid-column: span 2;
-    background-color: white;
   }
