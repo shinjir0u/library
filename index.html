@@ -11,7 +11,7 @@
     <dialog>
         <div class="dialog-box">
             <p class="dialog-heading">Fill the forms to add a new book</p>
-            <form class="dialog-content" method="dialog">
+            <form class="dialog-content">
                 <label for="book-name" class="book-name-label">Book Name<span class="required-text"></span></label>
                 <input type="text" name="book-name" id="book-name" autofocus required>
     
@@ -23,10 +23,10 @@
     
                 <label for="read-status" class="read-status-label">Already Read</span></label>
                 <div class="read-status-radio-buttons">
-                    <input type="radio" name="read-status" id="read-status">
-                    <p class="radio-text">Yes</p>
-                    <input type="radio" name="read-status" id="read-status">
-                    <p class="radio-text">No</p>
+                    <input type="radio" name="read-status" id="read-status-yes">
+                    <label class="radio-text" for="read-status-yes">Yes</label>
+                    <input type="radio" name="read-status" id="read-status-no">
+                    <label class="radio-text" for="read-status-no">No</label>
                 </div>
     
                 <div class="dialog-buttons">

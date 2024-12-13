@@ -8,6 +8,16 @@ const readStatusIcon = document.querySelector(".read-status-icon");
 const dialogBox = document.querySelector("dialog");
 const addBookButton = document.querySelector(".add-book");
 
+const dialogForm = document.querySelector("form");
+const addButton = document.querySelector(".add-button");
+const cancelButton = document.querySelector(".cancel-button");
+
+const bookNameField = document.querySelector("#book-name");
+const authorField = document.querySelector("#author");
+const numberOfPagesField = document.querySelector("#number-of-pages");
+const readStatusYesField = document.querySelector("#read-status-yes");
+const readStatusNoField = document.querySelector("#read-status-no");
+
 let books = new Map();
 
 let book1 = new Book(123, "Dummy", "Htoo", 150, true);
@@ -18,7 +28,7 @@ books.set(book1.isbn, book1);
 books.set(book2.isbn, book2);
 books.set(book3.isbn, book3);
 displayBooks(books);
-addButtonActions();
+addBookButtonActions();
 
 function Book(isbn, name, author, numberOfPages, readStatus) {
     this.isbn = isbn;
@@ -32,13 +42,52 @@ addBookButton.addEventListener("click", () => {
     dialogBox.showModal();
 });
 
+addButton.addEventListener("click", addButtonAction);
+cancelButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    dialogBox.close();
+});
+
+function addButtonAction(event) {
+    event.preventDefault();
+    if (!dialogForm.checkValidity())
+        dialogForm.reportValidity();
+    
+    const isbnValue = generateIsbn();
+    const bookNameValue = bookNameField.value;
+    const authorValue = authorField.value;
+    const numberOfPagesValue = numberOfPagesField.value;
+    const readStatusYesValue = readStatusYesField.checked;
+    const newBook = new Book(isbnValue, bookNameValue, authorValue, numberOfPagesValue, readStatusYesValue);
+    books.set(isbnValue, newBook);
+    resetFields(bookNameField, authorField, numberOfPagesField, readStatusYesField);
+    readStatusYesField.checked = false;
+    readStatusNoField.checked = false;
+    refreshPage();
+    dialogBox.close();
+}
+
+function resetFields(...fieldNodes) {
+    fieldNodes.forEach(node => {
+        node.value = "";
+    });
+}
+
+function generateIsbn() {
+    let isbn;
+    do {
+        isbn = +(Math.random()*1000 / (Math.random()*10)).toFixed(0);
+    } while(books.has(isbn));
+    return isbn;
+}
+
 function clearDisplayedBooks() {
     Array.from(booksNode.children).forEach(book => {
         booksNode.removeChild(book);
     });
 }
 
-function addButtonActions() {
+function addBookButtonActions() {
     const removeButtons = document.querySelectorAll(".remove-button");
     const readButtons = document.querySelectorAll(".read-button");
 
@@ -72,7 +121,7 @@ function changeReadStatus(event) {
 function refreshPage() {
     clearDisplayedBooks();
     displayBooks(books);
-    addButtonActions();
+    addBookButtonActions();
 }
 
 function displayBooks(books) {
