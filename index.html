@@ -12,20 +12,20 @@
         <div class="dialog-box">
             <p class="dialog-heading">Fill the forms to add a new book</p>
             <form class="dialog-content" method="dialog">
-                <label for="book-name-label" class="book-name-label">Book Name</label>
-                <input type="text" name="book-name" id="book-name-label" autofocus>
+                <label for="book-name" class="book-name-label">Book Name<span class="required-text"></span></label>
+                <input type="text" name="book-name" id="book-name" autofocus required>
     
-                <label for="author-label" class="author-label">Author</label>
-                <input type="text" name="author" id="author-label">
+                <label for="author" class="author-label">Author<span class="required-text"></span></label>
+                <input type="text" name="author" id="author" required>
     
-                <label for="number-of-pages-label" class="number-of-pages">Number of Pages</label>
-                <input type="number" name="number-of-pages" id="number-of-pages-label" min="20" max="5000">
+                <label for="number-of-pages" class="number-of-pages-label">Number of Pages<span class="required-text"></span></label>
+                <input type="number" name="number-of-pages" id="number-of-pages" min="20" max="5000" required>
     
-                <label for="read-status-label" class="read-status-label">Already Read</label>
+                <label for="read-status" class="read-status-label">Already Read</span></label>
                 <div class="read-status-radio-buttons">
-                    <input type="radio" name="read-status" id="read-status-label">
+                    <input type="radio" name="read-status" id="read-status">
                     <p class="radio-text">Yes</p>
-                    <input type="radio" name="read-status" id="read-status-label">
+                    <input type="radio" name="read-status" id="read-status">
                     <p class="radio-text">No</p>
                 </div>
     

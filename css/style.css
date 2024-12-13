@@ -229,7 +229,7 @@
     justify-items: start;
     align-items: center;
     grid-auto-rows: minmax(20px, 30px);
-    gap: 0.5rem;
+    gap: 1rem;
   }
 
   form > input,
@@ -246,7 +246,25 @@
     margin-right: 10px;
   }
 
+  .required-text::after {
+    content: "*";
+    color: red;
+  }
 
   .dialog-buttons {
     grid-column: span 2;
+  }
+
+  input[type="text"],
+  input[type="number"] {
+    background-color: white;
+    border: 1px solid var(--black-color);
+  }
+
+  input:user-invalid {
+    border: 2px solid red;
+  }
+
+  input.invalid:focus {
+    border: none;
   }

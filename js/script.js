@@ -28,12 +28,9 @@ function Book(isbn, name, author, numberOfPages, readStatus) {
     this.readStatus = readStatus;
 }
 
-addBookButton.addEventListener("click", showDialogBox);
-
-function showDialogBox() {
+addBookButton.addEventListener("click", () => {
     dialogBox.showModal();
-}
-
+});
 
 function clearDisplayedBooks() {
     Array.from(booksNode.children).forEach(book => {
