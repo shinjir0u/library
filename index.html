@@ -8,9 +8,9 @@
     <title>Library</title>
 </head>
 <body>
-    <div class="dialog-box">
+    <dialog>
         <p class="dialog-heading">Fill the forms to add a new book</p>
-        <div class="dialog-content">
+        <form class="dialog-content" method="dialog">
             <label for="book-name-label" class="book-name-label">Book Name</label>
             <input type="text" name="book-name" id="book-name-label" autofocus>
 
@@ -29,12 +29,11 @@
             </div>
 
             <div class="dialog-buttons">
-                <button type="button" class="cancel-button dialog-button">Cancel</button>
-                <button type="button" class="add-button dialog-button">Add</button>
+                <button type="submit" class="cancel-button dialog-button" formnovalidate>Cancel</button>
+                <button type="submit" class="add-button dialog-button">Add</button>
             </div>
-        </div>
-        
-    </div>
+        </form>
+    </dialog>
     <div class="container">
         <div class="sidebar">
             <div class="logo-content">

@@ -5,6 +5,9 @@ const authorIcon = document.querySelector(".author-icon");
 const numberOfPagesIcon = document.querySelector(".number-of-pages-icon");
 const readStatusIcon = document.querySelector(".read-status-icon");
 
+const dialogBox = document.querySelector("dialog");
+const addBookButton = document.querySelector(".add-book");
+
 let books = new Map();
 
 let book1 = new Book(123, "Dummy", "Htoo", 150, true);
@@ -24,6 +27,13 @@ function Book(isbn, name, author, numberOfPages, readStatus) {
     this.numberOfPages = numberOfPages;
     this.readStatus = readStatus;
 }
+
+addBookButton.addEventListener("click", showDialogBox);
+
+function showDialogBox() {
+    dialogBox.showModal();
+}
+
 
 function clearDisplayedBooks() {
     Array.from(booksNode.children).forEach(book => {
