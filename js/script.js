@@ -17,6 +17,7 @@ const authorField = document.querySelector("#author");
 const numberOfPagesField = document.querySelector("#number-of-pages");
 const readStatusYesField = document.querySelector("#read-status-yes");
 const readStatusNoField = document.querySelector("#read-status-no");
+const fieldsToCheck = [bookNameField, authorField, numberOfPagesField];
 
 let books = new Map();
 
@@ -50,21 +51,43 @@ cancelButton.addEventListener("click", (event) => {
 
 function addButtonAction(event) {
     event.preventDefault();
-    if (!dialogForm.checkValidity())
+    if (!dialogForm.checkValidity()) {
         dialogForm.reportValidity();
-    
-    const isbnValue = generateIsbn();
-    const bookNameValue = bookNameField.value;
-    const authorValue = authorField.value;
-    const numberOfPagesValue = numberOfPagesField.value;
-    const readStatusYesValue = readStatusYesField.checked;
-    const newBook = new Book(isbnValue, bookNameValue, authorValue, numberOfPagesValue, readStatusYesValue);
-    books.set(isbnValue, newBook);
-    resetFields(bookNameField, authorField, numberOfPagesField, readStatusYesField);
-    readStatusYesField.checked = false;
-    readStatusNoField.checked = false;
-    refreshPage();
-    dialogBox.close();
+        fieldsToCheck.forEach(checkElementValidity);
+        addLiveValidatityCheck();
+    }
+    else {
+        const isbnValue = generateIsbn();
+        const bookNameValue = bookNameField.value;
+        const authorValue = authorField.value;
+        const numberOfPagesValue = numberOfPagesField.value;
+        const readStatusYesValue = readStatusYesField.checked;
+        const newBook = new Book(isbnValue, bookNameValue, authorValue, numberOfPagesValue, readStatusYesValue);
+        books.set(isbnValue, newBook);
+        resetFields(bookNameField, authorField, numberOfPagesField, readStatusYesField);
+        readStatusYesField.checked = false;
+        readStatusNoField.checked = false;
+        refreshPage();
+        dialogBox.close();   
+    }
+}
+
+function addLiveValidatityCheck() {
+    fieldsToCheck.forEach((element) => {
+        element.addEventListener("input", addFieldValidityCheck);
+    });
+}
+
+function addFieldValidityCheck(event) {
+    if (event.target.checkValidity()) 
+        event.target.classList.remove("invalid");
+    else 
+        event.target.classList.add("invalid");
+}
+
+function checkElementValidity(inputField) {
+    if (!inputField.checkValidity())
+        inputField.classList.add("invalid");
 }
 
 function resetFields(...fieldNodes) {

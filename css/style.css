@@ -261,7 +261,7 @@
     border: 1px solid var(--black-color);
   }
 
-  input:user-invalid {
+  input.invalid {
     border: 2px solid red;
   }
 
