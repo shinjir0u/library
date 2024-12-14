@@ -46,6 +46,8 @@ addBookButton.addEventListener("click", () => {
 addButton.addEventListener("click", addButtonAction);
 cancelButton.addEventListener("click", (event) => {
     event.preventDefault();
+    resetFields(bookNameField, authorField, numberOfPagesField, readStatusYesField);
+
     dialogBox.close();
 });
 
@@ -93,6 +95,7 @@ function checkElementValidity(inputField) {
 function resetFields(...fieldNodes) {
     fieldNodes.forEach(node => {
         node.value = "";
+        node.classList.remove("invalid");
     });
 }
 
